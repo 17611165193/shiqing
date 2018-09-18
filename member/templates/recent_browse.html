@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="/static/favicon.ico">
+<title></title>
+<!-- Fontawesome icon CSS -->
+<link rel="stylesheet" href="/static/vendor/font-awesome-4.7.0/css/font-awesome.min.css" type="text/css">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="/static/vendor/bootstrap4alpha/css/bootstrap.css" type="text/css">
+
+<!-- swipebox CSS -->
+<link href="/static/vendor/masonry_swipebox/swipebox.min.css" rel="stylesheet">
+
+<!-- Adminux CSS -->
+<link rel="stylesheet" href="/static/css/dark_blue_adminux.css" type="text/css">
+</head>
+<body class="menuclose menuclose-right">
+<header class="navbar-fixed">
+
+<nav class="navbar navbar-toggleable-md navbar-inverse bg-faded">
+    <div class="sidebar-left">
+    <button class="btn btn-link icon-header mr-sm-2 pull-left menu-collapse" ><span class="fa fa-bars"></span></button>
+  </div>
+  <div class="sidebar-left"> <a class="navbar-brand" href="/problem/follow_list/">关注 </a>
+  </div>
+    <div class="sidebar-left"> <a class="navbar-brand" href="/problem/recommend_list/"> 推荐 </a>
+  </div>
+    </div>
+    <div class="sidebar-left"> <a class="navbar-brand" href="/problem/hot_list/"> 热榜 </a>
+  </div>
+</nav>
+
+</header>
+<div class="sidebar-left">
+<br>
+<ul class="nav flex-column in" id="side-menu">
+  <li class="title-nav"><a href="/member/index/">首页</a></li>
+  <li class="title-nav"><a href="/problem/set_problem/">提问发布</a></li>
+  <li class="title-nav"><a href="/problem/my_follow/">我的关注</a></li>
+  <li class="title-nav"><a href="/problem/collection_list/">我的收藏</a></li>
+  <li class="title-nav"><a href="/problem/recent_browse/">最近浏览</a></li>
+</ul>
+<hr>
+    <ul class="nav flex-column in" id="side-menu">
+        <li class="title-nav"><a href="/problem/dynamic_message/">动态消息</a></li>
+        <li class="title-nav"><a href="/problem/message/">私信</a></li>
+          <li class="title-nav"><a href="/problem/dynamic_message/">动态消息</a></li>
+</ul>
+</div>
+<div class="wrapper-content">
+  <div class="container">
+    <div class="row  align-items-center justify-content-between">
+      <div class="col-11 col-sm-12 page-title">
+      </div>
+    </div>
+  <form action="/problem/search/" method="post">
+      <div class="input-group subscribe justify-content-center">
+            <input type="text" class="form-control" placeholder="输入想要搜索的内容" aria-describedby="basic-addon2" name="search_text">
+            <button class="input-group-addon btn text-white" id="basic-addon2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">搜索</font></font></button>
+      </div>
+      </form>
+      {% for item in data %}
+      <div class="card ">
+          <div class="card-header align-items-start justify-content-between flex">
+            <div class="list-unstyled comment-list">
+              <div class="media"> <span class="message_userpic"><img class="d-flex mr-3" src="/static/img/user-header.png" alt="通用用户图像"> <span class="user-status bg-success "></span></span>
+                <div class="media-body">
+                  <h6 class="mt-0 mb-1"><a href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ item.question.member.name }}</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">发布了{{ item.question.problem_text }}?!</font></font><a href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font></h6><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                  {{ item.question.created_at.year }}年{{ item.question.created_at.month }}月{{ item.question.created_at.day }}日{{ item.question.created_at.hour }}时{{ item.question.created_at.minute }}分 </font></font></div>
+                <ul class="nav  card-header-pills pull-right">
+                  <li class="nav-item">
+                    <button class="btn btn-sm btn-link btn-round" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-chevron-down"></i></button>
+                    <div class="dropdown-menu"><a class="dropdown-item" href="/problem/follow_member/?id={{ item.question.member.id }}&question_id={{ item.question.id }}">关注作者</a><a class="dropdown-item" href="/problem/collection/?id={{ item.question.id }}">收藏</a><a class="dropdown-item" href="/problem/private_letter/?id={{ item.question.member.id }}">私信</a>
+                      </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="card-block">
+          {% if item.answer.answer_text %}
+            <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ item.answer.question.member.name }}的回答:  {{ item.answer.question.answer_text }}</font><font style="vertical-align: inherit;"> </font></font></p>
+          {% endif %}
+          <div class="col post-options">
+              <button class="btn btn-link text-primary mr-2"><i class="fa fa-heart-o text-danger"></i> <span class="text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><a href="/problem/fabulous/?question_id={{ item.question.id }}">赞<a/></font></font></span> <span class="text-white"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font></span></button>
+              <button class="btn btn-link text-primary mr-2"><i class="fa fa-comments text-warning"></i> <span class="text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><a href="/problem/private_letter/?id={{ item.member.id }}">私信</a></font></font></span> <span class="text-white"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font></span></button>
+            </div>
+          </div>
+        </div>
+  {% endfor %}
+
+
+<!-- jQuery first, then Tether, then Bootstrap JS. -->
+<script src="/static/js/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script src="/static/vendor/bootstrap4alpha/js/tether.min.js"></script>
+<script src="/static/vendor/bootstrap4alpha/js/bootstrap.min.js" type="text/javascript"></script>
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="/static/js/ie10-viewport-bug-workaround.js"></script>  <!-- Circular chart progress js -->
+<script src="/static/vendor/cicular_progress/circle-progress.min.js" type="text/javascript"></script>
+
+<!--swipebox image preview js-->
+<script type="text/javascript" src="/static/vendor/masonry_swipebox/jquery.swipebox.min.js"></script>
+
+<!--sparklines js-->
+<script type="text/javascript" src="/static/vendor/sparklines/jquery.sparkline.min.js"></script>
+
+<!-- custome template js -->
+<script src="/static/js/adminux.js" type="text/javascript"></script>
+<script>
+    "use strict";
+    $('.swipebox').swipebox();
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="/static/favicon.ico">
+<title></title>
+<!-- Fontawesome icon CSS -->
+<link rel="stylesheet" href="/static/vendor/font-awesome-4.7.0/css/font-awesome.min.css" type="text/css">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="/static/vendor/bootstrap4alpha/css/bootstrap.css" type="text/css">
+
+<!-- Adminux CSS -->
+<link rel="stylesheet" href="/static/css/dark_blue_adminux.css" type="text/css">
+</head>
+<body>
+<figure class="background"> <img src="/static/img/login_bg.jpg" alt="Adminux- sign in "> </figure>
+<header class="navbar-fixed">
+    <nav class="navbar navbar-toggleable-md sign-in-header">
+      <div class="col"></div>
+      <div class="sidebar-right pull-right" >
+        <ul class="navbar-nav  justify-content-end">
+          <li><a href="/member/phone_register/" class="btn btn-link mt-2 text-white " >📱手机注册</a></li>
+        </ul>
+      </div>
+    </nav>
+</header>
+<div class="wrapper-content-sign-in">
+  <div class="container text-center">
+    <form class="form-signin1 smallbox" action="/member/login/" method="post">
+      <h2 class="tex-black mb-4">用户登陆</h2>
+      <label  class="sr-only">用户名</label>
+      <input type="text" class="form-control" placeholder="请输入手机号码" name="phone">
+      <br>
+      <label class="sr-only">密码</label>
+      <input type="password" class="form-control" placeholder="请输入密码" name="password">
+      <br>
+      <button class="btn btn-lg btn-primary btn-round" type="submit"> 登陆 </button><br>
+        {% if message %}
+                    <div id="message" style="margin-bottom: 10px;color: #e5f0f1">{{ message }}</div>
+        {% endif %}
+      <a href="/member/forget_password/" class="btn btn-link mt-2 text-white">忘记密码</a>
+      <a href="/member/login_quick/" class="btn btn-link mt-2 text-white">快捷登陆</a>
+    </form>
+  </div>
+</div>
+<!-- jQuery first, then Tether, then Bootstrap JS. --> 
+<script src="/static/js/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script src="/static/vendor/bootstrap4alpha/js/tether.min.js"></script>
+<script src="/static/vendor/bootstrap4alpha/js/bootstrap.min.js" type="text/javascript"></script>
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug --> 
+<script src="/static/js/ie10-viewport-bug-workaround.js"></script>
+    <script>
+       "use strict";
+        $('input[type="checkbox"]').on('change', function(){
+            $(this).parent().toggleClass("active")
+            $(this).closest(".media").toggleClass("active");
+        }); 
+      </script>
+</body>
+</html>
